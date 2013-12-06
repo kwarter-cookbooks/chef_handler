@@ -13,17 +13,19 @@ require 'net/smtp'
 module Email
   class Notifications < Chef::Handler
 
-    def initialize(smtp_server, from_address, to_address)
+    def initialize(smtp_server, from_address, to_address, environment, ipaddress)
       @smtp_server  = smtp_server
       @from_address = from_address
       @to_address   = to_address
+      @environment  = environment
+      @ipaddress    = ipaddress
     end
 
     def report
       # Create the email message
       message  = "From: #{@from_address}\n"
       message << "To: #{@to_address}\n"
-      message << "Subject: Chef Run Failure\n"
+      message << "Subject: #{@environment} - #{@ipaddress} - Chef Run Failure\n"
       message << "Date: #{Time.now.rfc2822}\n\n"
 
       # The Node is available as +node+
