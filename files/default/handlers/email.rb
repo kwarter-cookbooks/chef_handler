@@ -25,7 +25,7 @@ module Email
       # Create the email message
       message  = "From: #{@from_address}\n"
       message << "To: #{@to_address}\n"
-      message << "Subject: #{@environment} - #{@ipaddress} - Chef Run Failure\n"
+      message << "Subject: Chef Run Failure - #{@environment} - #{@ipaddress}\n"
       message << "Date: #{Time.now.rfc2822}\n\n"
 
       # The Node is available as +node+
